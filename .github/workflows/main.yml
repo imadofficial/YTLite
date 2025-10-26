@@ -82,6 +82,18 @@ jobs:
           path: main
           submodules: recursive
 
+      - name: Fix SSL Certificates
+        run: |
+          brew install ca-certificates
+          echo 'export SSL_CERT_FILE=$(brew --prefix)/etc/ca-certificates/cert.pem' >> $GITHUB_ENV
+          echo 'export REQUESTS_CA_BUNDLE=$(brew --prefix)/etc/ca-certificates/cert.pem' >> $GITHUB_ENV
+
+      - name: Hide sensitive inputs
+        uses: levibostian/action-hide-sensitive-inputs@v1
+        with:
+          exclude_inputs: bundle_id,display_name,enable_demc,enable_ryd,enable_youpip,enable_yq,enable_ytuhd,info_note,tweak_version
+
+
       - name: Hide sensitive inputs
         uses: levibostian/action-hide-sensitive-inputs@v1
         with:
