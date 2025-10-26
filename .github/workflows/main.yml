@@ -85,8 +85,8 @@ jobs:
       - name: Fix SSL Certificates
         run: |
           brew install ca-certificates
-          echo 'export SSL_CERT_FILE=$(brew --prefix)/etc/ca-certificates/cert.pem' >> $GITHUB_ENV
-          echo 'export REQUESTS_CA_BUNDLE=$(brew --prefix)/etc/ca-certificates/cert.pem' >> $GITHUB_ENV
+          echo "ca_certificate=$(brew --prefix)/etc/ca-certificates/cert.pem" > ~/.wgetrc
+
 
       - name: Hide sensitive inputs
         uses: levibostian/action-hide-sensitive-inputs@v1
